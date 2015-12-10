@@ -2,7 +2,6 @@ package db;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import model.City;
 import model.Country;
 import model.Province;
@@ -10,7 +9,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build.VERSION;
 import db.CoolWeatherOpenHelper;
 
 public class CoolWeatherDB {
@@ -133,7 +131,7 @@ public class CoolWeatherDB {
 	/**
 	 * 从数据库读取某城市下所有的县信息
 	 */
-	public List<Country> loadCounties(int cityId) {
+	public List<Country> loadCountries(int cityId) {
 		List<Country> list = new ArrayList<Country>();
 		Cursor cursor = db.query("Country", null, "city_id= ?",
 				new String[] { String.valueOf(cityId) }, null, null, null);
