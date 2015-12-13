@@ -1,6 +1,7 @@
 package activity;
 
 
+import service.AutoUpdateService;
 import util.HttpCallbackListener;
 import util.HttpUtil;
 import util.Utility;
@@ -18,10 +19,10 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.view.View.OnClickListener;
 
 
-public class WeatherActivity extends Activity implements OnClickListener{
+
+public class WeatherActivity extends Activity {
 	
 	private  LinearLayout weatherInfoLayout;
 	
@@ -86,11 +87,10 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		}
 		switchCity = (Button) findViewById(R.id.switch_city);
 		refreshWeather = (Button) findViewById(R.id.refresh_weather);
-		switchCity.setOnClickListener(this);
-		refreshWeather.setOnClickListener(this);
+		switchCity.setOnClickListener((android.view.View.OnClickListener) this);
+		refreshWeather.setOnClickListener((android.view.View.OnClickListener) this);
 	}
 
-	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.switch_city:
@@ -186,9 +186,7 @@ public class WeatherActivity extends Activity implements OnClickListener{
 		currentDataText.setText(prefs.getString("current_date", ""));
 		weatherInfoLayout.setVisibility(View.VISIBLE);
 		cityNameText.setVisibility(View.VISIBLE);
-	}
-
-
-
-	
+		Intent intent = new Intent(this, AutoUpdateService.class);
+		startService(intent);
+	}	
 }
